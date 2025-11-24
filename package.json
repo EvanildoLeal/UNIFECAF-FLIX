@@ -1,11 +1,43 @@
 {
+  "name": "unifecaf-flix",
+  "version": "1.0.0",
+  "description": "API de filmes UniFECAF Flix com endpoints RESTful, autenticação, CRUD completo e filtros avançados - Projeto acadêmico FECAF/2025",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvanildoLeal/UNIFECAF-FLIX.git"
+  },
+  "keywords": [
+    "api",
+    "streaming",
+    "filmes",
+    "fecaf",
+    "nodejs",
+    "mysql",
+    "restful",
+    "mvc",
+    "backend"
+  ],
+  "author": "Evanildo Leal",
+  "license": "ISC",
+  "type": "commonjs",
   "dependencies": {
     "@prisma/client": "^6.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "prisma": "^6.19.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/EvanildoLeal/UNIFECAF-FLIX/issues"
+  },
+  "homepage": "https://github.com/EvanildoLeal/UNIFECAF-FLIX#readme"
 }

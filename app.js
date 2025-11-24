@@ -1,6 +1,8 @@
 const express = require("express");
 require("dotenv").config();
 
+const cors = require("cors");
+
 // Importar controller
 const ControllerFilme = require("./controller/controllerFilme");
 
@@ -8,6 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware para parsing JSON
+app.use(cors());
 app.use(express.json());
 
 // Middleware de logging
@@ -18,14 +21,14 @@ app.use((req, res, next) => {
 
 // Rotas da API
 // Rotas obrigatórias
-app.get("/v1/controle-filmes/filme", ControllerFilme.listarFilmes);
-app.get("/v1/controle-filmes/filme/:id", ControllerFilme.buscarFilmePorId);
-app.get("/v1/controle-filmes/filtro/filme", ControllerFilme.filtrarFilmes);
+app.get('/v1/fecaf/controle-filmes/filme', ControllerFilme.listarFilmes);
+app.get('/v1/fecaf/controle-filmes/filme/:id', ControllerFilme.buscarFilmePorId);
+app.get('/v1/fecaf/controle-filmes/filtro/filme', ControllerFilme.filtrarFilmes);
 
 // Rotas adicionais para CRUD completo
-app.post("/v1/controle-filmes/filme", ControllerFilme.criarFilme);
-app.put("/v1/controle-filmes/filme/:id", ControllerFilme.atualizarFilme);
-app.delete("/v1/controle-filmes/filme/:id", ControllerFilme.deletarFilme);
+app.post('/v1/fecaf/controle-filmes/filme', ControllerFilme.criarFilme);
+app.put('/v1/fecaf/controle-filmes/filme/:id', ControllerFilme.atualizarFilme);
+app.delete('/v1/fecaf/controle-filmes/filme/:id', ControllerFilme.deletarFilme);
 
 // Rota de health check
 app.get("/health", (req, res) => {
@@ -36,19 +39,19 @@ app.get("/health", (req, res) => {
   });
 });
 
-// Rota padrão
-app.get("/", (req, res) => {
+// Rota padrão - atualize os endpoints listados
+app.get('/', (req, res) => {
   res.json({
-    message: "Bem-vindo à API UniFECAF Flix!",
-    version: "1.0.0",
+    message: 'Bem-vindo à API UniFECAF Flix!',
+    version: '1.0.0',
     endpoints: {
-      listarFilmes: "GET /v1/controle-filmes/filme",
-      buscarFilme: "GET /v1/controle-filmes/filme/:id",
-      filtrarFilmes: "GET /v1/controle-filmes/filtro/filme?nome=xxx",
-      criarFilme: "POST /v1/controle-filmes/filme",
-      atualizarFilme: "PUT /v1/controle-filmes/filme/:id",
-      deletarFilme: "DELETE /v1/controle-filmes/filme/:id",
-    },
+      listarFilmes: 'GET /v1/fecaf/controle-filmes/filme',
+      buscarFilme: 'GET /v1/fecaf/controle-filmes/filme/:id',
+      filtrarFilmes: 'GET /v1/fecaf/controle-filmes/filtro/filme?nome=xxx',
+      criarFilme: 'POST /v1/fecaf/controle-filmes/filme',
+      atualizarFilme: 'PUT /v1/fecaf/controle-filmes/filme/:id',
+      deletarFilme: 'DELETE /v1/fecaf/controle-filmes/filme/:id'
+    }
   });
 });
 
@@ -71,10 +74,12 @@ app.use((err, req, res, next) => {
 
 // Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`🎬 UniFECAF Flix API rodando na porta ${PORT}`);
-  console.log(`📊 Ambiente: ${process.env.NODE_ENV || "development"}`);
-  console.log(`🔗 Health check: http://localhost:${PORT}/health`);
-  console.log(`🎯 API Base: http://localhost:${PORT}/v1/controle-filmes/filme`);
+  console.log(`=== UNIFECAF FLIX API ===`);
+  console.log(`Porta: ${PORT}`);
+  console.log(`Ambiente: ${process.env.NODE_ENV || "development"}`);
+  console.log(`Health: http://localhost:${PORT}/health`);
+  console.log(`API: http://localhost:${PORT}/v1/fecaf/controle-filmes/filme`);
+  console.log(`========================`);
 });
 
 module.exports = app;
